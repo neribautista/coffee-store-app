@@ -1,0 +1,33 @@
+name: coffee-store-app
+
+services:
+  backend:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001" 
+    environment: .env
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:80" 
+    environment: .env
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
