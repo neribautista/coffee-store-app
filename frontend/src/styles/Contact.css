@@ -11,7 +11,7 @@
 /* Box styling for the form */
 .contact-box {
   background: white;
-  padding: 40px;
+  padding: 20px;
   border-radius: 15px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   max-width: 600px;
@@ -25,6 +25,13 @@
 }
 
 /* Heading styling */
+.contact-icon{
+  margin-top: 0px;
+  font-size: 35px;
+  color: #844916;
+  text-align: center;
+}
+
 .contact-heading {
   font-size: 28px;
   font-weight: bold;
@@ -89,7 +96,7 @@
 }
 
 .contact-submit:active {
-  transform: scale(0.98);
+  transform: scale(0.80);
 }
 
 /* Contact Details Section */

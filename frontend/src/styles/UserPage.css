@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #070708, #2575fc);
+  background: linear-gradient(135deg, #070708, #985517);
   padding: 20px;
 }
 
@@ -60,7 +60,7 @@
 .user-submit {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: linear-gradient(135deg, #070708, #985517);
   color: white;
   border: none;
   border-radius: 8px;
@@ -71,10 +71,22 @@
 }
 
 .user-submit:hover {
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  background: linear-gradient(135deg, #f25a0f, #e3bb35);
   transform: scale(1.05);
 }
 
 .user-submit:active {
   transform: scale(0.98);
+}
+
+.login-label{
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.login-link {
+  color: #985517;
+  text-decoration: none;
+  font-weight: bold;
 }

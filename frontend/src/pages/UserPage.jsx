@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/UserPage.css'; 
 
 const UserPage = () => {
   const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,26 +22,29 @@ const UserPage = () => {
     e.preventDefault();
 
     try {
-        const response = await fetch('http://localhost:3001/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(user),
-        });
+      if (user.password !== user.confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
 
-        // Validate that password and confirm password match
-        if (user.password !== user.confirmPassword) {
-          alert("Passwords do not match!");
-          return;
-        }
+      const response = await fetch('http://localhost:3001/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
 
-        console.log("User data submitted:", user);
-        alert("Profile created successfully!");
-        setUser({ first_name: '', last_name: '', email: '', password: '', confirmPassword:'' }); //Reset fields
+      if (response.ok) {
+        alert('Profile created successfully!');
+        setUser({ first_name: '', last_name: '', email: '', password: '', confirmPassword: '' }); // Reset fields
+        navigate('/login'); // Redirect to login page
+      } else {
+        alert('Failed to create profile. Please try again.');
+      }
     } catch (error) {
-        console.error("Error submitting user data:", error);
-        alert("An error occurred while updating the profile.");
+      console.error('Error submitting user data:', error);
+      alert('An error occurred while updating the profile.');
     }
   };
 
@@ -113,7 +120,14 @@ const UserPage = () => {
           <button type="submit" className="user-submit">
             Register
           </button>
+
+          {/* Has Account */}
+          <label htmlFor="login" className="login-label"> 
+            Already have an account? <a href="/login" className="login-link">Login</a>
+          </label>
         </form>
+
+
       </div>
     </div>
   );

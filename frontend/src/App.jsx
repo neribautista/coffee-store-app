@@ -5,6 +5,7 @@ import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/ui/Navbar";
 import UserPage from "./pages/UserPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/user" element={<UserPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Box>
   );

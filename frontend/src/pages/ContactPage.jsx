@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/Contact.css'; 
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const ContactPage = () => {
   const [newContact, setNewContact] = useState({
@@ -45,6 +48,7 @@ const ContactPage = () => {
   return (
     <div className="contact-container">
       <div className="contact-box">
+        <h1 className="contact-icon">  <FontAwesomeIcon icon={faEnvelope} style={{color: "#141414",}} /></h1>
         <h1 className="contact-heading">Contact Us</h1>
         <p className="contact-description">
           We'd love to hear from you! Please fill out the form below.
