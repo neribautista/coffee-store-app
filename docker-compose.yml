@@ -7,7 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001" 
-    environment: .env
+    env_file:
+      - .env
     depends_on:
       - mongo
 
@@ -16,7 +17,8 @@ services:
       context: ./frontend
     ports:
       - "5173:80" 
-    environment: .env
+    env_file: 
+      - .env
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
