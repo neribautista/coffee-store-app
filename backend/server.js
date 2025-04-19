@@ -16,7 +16,6 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
-
 // Importing routes
 app.use("/api/products", productRoutes)
 app.use("/api/contact", contactRoutes)
