@@ -75,19 +75,27 @@ body {
   background-color: #0056b3;
 }
 
-.register-link {
-  font-size: 14px;
-  color: #985517;
+/* Password Container */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 2.5rem; /* Add space for the eye icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
   cursor: pointer;
-  margin-left: 15px;
+  font-size: 1.2rem;
+  color: #666;
+  transition: color 0.3s ease;
 }
 
-.register-link:hover {
-  text-decoration: underline;
-}
-
-.register-account{
-    font-size: 14px;
-    color: #333;
-    margin-top: 10px;
+.toggle-password:hover {
+  color: #333;
 }

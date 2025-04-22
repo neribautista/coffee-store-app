@@ -90,3 +90,29 @@
   text-decoration: none;
   font-weight: bold;
 }
+
+/* Password Container */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 2.5rem; /* Add space for the eye icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+  transition: color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.toggle-password:hover {
+  color: #333;
+}
