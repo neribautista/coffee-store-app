@@ -19,7 +19,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/api/login", {
+      const response = await fetch("http://localhost:3001/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,13 +29,22 @@ const LoginPage = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Login successful:", data);
         alert("Login successful!");
-        navigate("/"); // Redirect to home page
+
+        // Store the JWT token and user data in localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ first_name: data.first_name })
+        );
+
+        // Redirect to the home page
+        navigate("/");
       } else {
         const errorData = await response.json();
-        console.error("Error logging in:", errorData);
-        alert("Failed to log in. Please check your credentials.");
+        alert(
+          errorData.message || "Invalid email or password. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error logging in:", error);
@@ -76,7 +85,14 @@ const LoginPage = () => {
         </form>
         <p className="register-account">
           Don't have an account?{" "}
-          <span className="register-link" onClick={() => navigate("/user")}>
+          <span
+            className="register-link"
+            onClick={() => navigate("/user")} // Navigate to the UserPage
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+          >
             Register here
           </span>
         </p>

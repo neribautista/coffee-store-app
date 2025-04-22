@@ -20,34 +20,34 @@ const UserPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       if (user.password !== user.confirmPassword) {
-        alert('Passwords do not match!');
+        alert("Passwords do not match!");
         return;
       }
-
-      const response = await fetch('http://localhost:3001/api/users', {
-        method: 'POST',
+  
+      const response = await fetch("http://localhost:3001/api/users", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
       });
-
+  
       if (response.ok) {
-        alert('Profile created successfully!');
-        setUser({ first_name: '', last_name: '', email: '', password: '', confirmPassword: '' }); // Reset fields
-        navigate('/login'); // Redirect to login page
+        alert("Registration successful! Please log in.");
+        navigate("/login");
       } else {
-        alert('Failed to create profile. Please try again.');
+        const errorData = await response.json();
+        alert(errorData.message || "Registration failed. Please try again.");
       }
     } catch (error) {
-      console.error('Error submitting user data:', error);
-      alert('An error occurred while updating the profile.');
+      console.error("Error registering user:", error);
+      alert("An error occurred. Please try again later.");
     }
   };
-
+  
   return (
     <div className="user-container">
       <div className="user-box">
