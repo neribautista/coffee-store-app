@@ -11,7 +11,7 @@ const productSchema = mongoose.Schema({
         default: 0.0
     },
     image: {
-        type: String, //might want to upload
+        type: String, 
         required: true
     },
 }, {

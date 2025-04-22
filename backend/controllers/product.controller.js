@@ -14,47 +14,52 @@ export const getProducts = async (req, res) => {
 
 };
 
-export const createProduct = async (req, res) =>{
-    const product = req.body; // user will send this data
-
-    if(!product.name || !product.price || !product.image) {
-        return res.status(400).json({ message: 'Missing required fields: name, price, image' });
+export const createProduct = async (req, res) => {
+    const { name, price } = req.body;
+  
+    if (!name || !price || !req.file) {
+      return res.status(400).json({ message: "Missing required fields: name, price, image" });
     }
-
-    const newProduct = new Product(product)
-
-    try{
-        await newProduct.save(); // save the product to the database
-        res.status(201).json({success:true, data: newProduct});
-    } catch(error) {
-        console.error('Error saving product:', error);
-        res.status(500).json({ success: false, message: 'Server error' }); 
-    }
-};
-
-export const updateProduct = async (req, res) => {
-    const { id } = req.params; 
-    const product = req.body; 
-
-    // Validate the product ID
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ success: false, message: "Invalid Product Id" });
-    }
-
+  
+    const product = {
+      name,
+      price,
+      image: req.file.filename, // Save only the filename
+    };
+  
+    const newProduct = new Product(product);
+  
     try {
-        // Update the product in the database
-        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true });
-
-        if (!updatedProduct) {
-            return res.status(404).json({ success: false, message: "Product not found" });
-        }
-
-        res.status(200).json({ success: true, data: updatedProduct });
+      await newProduct.save(); // Save the product to the database
+      res.status(201).json({ success: true, data: newProduct });
     } catch (error) {
-        console.error('Error updating product:', error.message);
-        res.status(500).json({ success: false, message: 'Server Error' });
+      console.error("Error saving product:", error);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-};
+  };
+  
+  export const updateProduct = async (req, res) => {
+    const { id } = req.params;
+    const { name, price } = req.body;
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ success: false, message: "Invalid Product Id" });
+    }
+  
+    const updatedProduct = {
+      name,
+      price,
+      image: req.file ? req.file.filename : undefined, // Update the image if a new file is uploaded
+    };
+  
+    try {
+      const product = await Product.findByIdAndUpdate(id, updatedProduct, { new: true });
+      res.status(200).json({ success: true, data: product });
+    } catch (error) {
+      console.error("Error updating product:", error);
+      res.status(500).json({ success: false, message: "Server error" });
+    }
+  };
 
 export const deleteProduct = async (req, res) => {
     const { id } = req.params;

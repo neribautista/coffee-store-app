@@ -5,23 +5,30 @@ import productRoutes from './routes/product.route.js';
 import contactRoutes from './routes/contact.route.js';
 import userRoutes from './routes/user.route.js';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 const app = express();
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3001;
 
 // Importing routes
-app.use("/api/products", productRoutes)
-app.use("/api/contact", contactRoutes)
-app.use("/api/users", userRoutes)
+app.use("/api/products", productRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/users", userRoutes);
+
+// Serve the uploads folder as static
+app.use('/uploads', express.static(path.resolve(__dirname, '../uploads'))); // Adjusted path
 
 app.listen(PORT, async () => {
     try {
@@ -32,4 +39,3 @@ app.listen(PORT, async () => {
         process.exit(1); // Exit the process with failure
     }
 });
-
