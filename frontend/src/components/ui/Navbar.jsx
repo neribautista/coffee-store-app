@@ -24,8 +24,8 @@ const Navbar = ({ userProp }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     alert("You have been logged out.");
-    setUser(null); // Clear user state
-    navigate("/login"); // Redirect to login page
+    setUser(null); 
+    navigate("/login");
   };
 
   // Toggle dropdown menu

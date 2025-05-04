@@ -99,3 +99,20 @@ body {
 .toggle-password:hover {
   color: #333;
 }
+
+.register-link {
+  font-size: 14px;
+  color: #985517;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+.register-account{
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+}
