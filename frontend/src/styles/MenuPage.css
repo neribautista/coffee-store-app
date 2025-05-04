@@ -85,8 +85,12 @@
 /* Product List Styling */
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4,1fr); 
+  gap: 1rem; 
+  justify-content: center; 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  padding: 1rem; 
 }
 
 .product-card {
@@ -97,6 +101,11 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px; 
+  height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card:hover {
@@ -106,13 +115,14 @@
 
 .product-image {
   max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 1rem;
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .product-name {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #333;
   margin-bottom: 0.5rem;
 }
@@ -142,19 +152,19 @@
 }
 
 .edit-button {
-  background-color: #006241; /* Starbucks green */
+  background-color: #006241; 
 }
 
 .edit-button:hover {
-  background-color: #004d32; /* Darker green */
+  background-color: #004d32; 
 }
 
 .delete-button {
-  background-color: #d32f2f; /* Red for delete */
+  background-color: #d32f2f; 
 }
 
 .delete-button:hover {
-  background-color: #b71c1c; /* Darker red */
+  background-color: #b71c1c; 
 }
 
 /* Responsive Design */
