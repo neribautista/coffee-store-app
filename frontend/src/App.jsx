@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
+import { refreshAccessToken } from "./utils/auth.js"; 
 import ContactPage from "./pages/ContactPage";
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/ui/Navbar";
@@ -16,23 +16,38 @@ function App() {
 
   // Auto-login on app startup
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
 
-  // Allow access to login and registration pages without redirection
-  if (!token || !storedUser) {
-    if (window.location.pathname !== "/login" && window.location.pathname !== "/user") {
-      navigate("/login");
+    if (!token || !storedUser) {
+      if (window.location.pathname !== "/login" && window.location.pathname !== "/user") {
+        navigate("/login");
+      }
+    } else {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch (error) {
+        console.error("Error parsing user data:", error);
+        localStorage.removeItem("user");
+      }
     }
-  } else {
-    try {
-      setUser(JSON.parse(storedUser)); // Parse only if storedUser is not null
-    } catch (error) {
-      console.error("Error parsing user data:", error);
-      localStorage.removeItem("user"); // Clear invalid data
-    }
-  }
-}, [navigate]);
+  }, [navigate]);
+
+  // Refresh token periodically
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const newToken = await refreshAccessToken();
+      if (!newToken) {
+        // If refreshing the token fails, log the user out
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/login");
+      }
+    }, 23 * 60 * 60 * 1000); 
+
+    return () => clearInterval(interval); 
+  }, [navigate]);
 
   return (
     <Box minH={"100vh"}>

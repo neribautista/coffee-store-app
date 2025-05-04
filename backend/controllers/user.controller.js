@@ -44,7 +44,7 @@ export const registerUser = asyncHandler(async (req, res) => {
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      token: generateToken(user._id),
+      token: generateAccessToken(user._id),
     });
   } else {
     res.status(400);
@@ -62,16 +62,29 @@ export const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
+    // Generate tokens
+    const accessToken = generateAccessToken(user._id);
+    const refreshToken = jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
+      expiresIn: "7d", 
+    });
+
+    // Set refresh token in HttpOnly cookie
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", 
+      sameSite: "strict", 
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    });
+
+    // Send the access token and user details to the client
     res.json({
-      _id: user.id,
+      token: accessToken,
       first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
-      token: generateToken(user._id),
     });
   } else {
-    res.status(400);
-    throw new Error('Invalid credentials');
+    res.status(401).json({ message: "Invalid email or password" });
   }
 });
 
@@ -88,9 +101,51 @@ export const getMe = asyncHandler(async (req, res) => {
   });
 });
 
-// Generate JWT
-const generateToken = (id) => {
+// @desc    Logout user
+// @route   POST /api/users/logout
+// @access  Public
+export const logoutUser = asyncHandler(async (req, res) => {
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+// Generate a new access token
+const generateAccessToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '1d',
+    expiresIn: "1hr", 
   });
 };
+
+// Generate a new refresh token
+const generateRefreshToken = (user) => {
+  return jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
+    expiresIn: "7d", 
+  });
+};
+
+// Refresh Token Endpoint
+export const refreshAccessToken = asyncHandler(async (req, res) => {
+  const refreshToken = req.cookies.refreshToken; 
+
+  if (!refreshToken) {
+    return res.status(401).json({ message: "No refresh token provided" });
+  }
+
+  try {
+    // Verify the refresh token
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+
+    // Generate a new access token
+    const accessToken = generateAccessToken(decoded.id);
+
+    res.status(200).json({ accessToken }); 
+  } catch (error) {
+    console.error("Error verifying refresh token:", error.message);
+    res.status(403).json({ message: "Invalid refresh token" });
+  }
+});

@@ -17,27 +17,28 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch("http://localhost:3001/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", 
         body: JSON.stringify(credentials),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         alert("Login successful!");
-
-        // Store the JWT token and user data in localStorage
+  
+        // Store the access token in localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem(
           "user",
           JSON.stringify({ first_name: data.first_name })
         );
-
+  
         // Redirect to the home page
         navigate("/");
       } else {
@@ -87,7 +88,7 @@ const LoginPage = () => {
           Don't have an account?{" "}
           <span
             className="register-link"
-            onClick={() => navigate("/user")} // Navigate to the UserPage
+            onClick={() => navigate("/user")} 
             style={{
               cursor: "pointer",
               textDecoration: "underline",
