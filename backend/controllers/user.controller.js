@@ -65,15 +65,14 @@ export const loginUser = asyncHandler(async (req, res) => {
     // Generate tokens
     const accessToken = generateAccessToken(user._id);
     const refreshToken = jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
-      expiresIn: "7d", 
+      expiresIn: "1d", 
     });
 
     // Set refresh token in HttpOnly cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", 
       sameSite: "strict", 
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      maxAge: 23 * 60 * 60 * 1000, // 23 hours
     });
 
     // Send the access token and user details to the client
@@ -107,7 +106,6 @@ export const getMe = asyncHandler(async (req, res) => {
 export const logoutUser = asyncHandler(async (req, res) => {
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
   });
 
@@ -117,16 +115,10 @@ export const logoutUser = asyncHandler(async (req, res) => {
 // Generate a new access token
 const generateAccessToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1hr", 
+    expiresIn: "15m", 
   });
 };
 
-// Generate a new refresh token
-const generateRefreshToken = (user) => {
-  return jwt.sign({ id: user._id }, process.env.JWT_REFRESH_SECRET, {
-    expiresIn: "7d", 
-  });
-};
 
 // Refresh Token Endpoint
 export const refreshAccessToken = asyncHandler(async (req, res) => {

@@ -35,4 +35,18 @@ export const protect = asyncHandler(async (req, res, next) => {
     res.status(401);
     throw new Error('Not authorized, token failed');
   }
+
+  console.log("Authenticated user:", req.user);
+});
+
+export const isAdmin = asyncHandler(async (req, res, next) => {
+  const adminEmail = "fahrenheitcoffeeph@gmail.com";
+
+  if (req.user && req.user.email === adminEmail) {
+    next(); 
+  } else {
+    res.status(403); // Forbidden
+    throw new Error("Access denied. Admins only.");
+    
+  }
 });

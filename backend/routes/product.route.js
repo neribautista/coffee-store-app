@@ -3,6 +3,7 @@ import { createProduct, getProducts, updateProduct, deleteProduct } from '../con
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { protect, isAdmin } from '../middleware/authMiddleware.js'; 
 
 const router = express.Router();
 
@@ -24,8 +25,9 @@ const upload = multer({ storage });
 
 // Product Routes
 router.get('/', getProducts);
-router.post('/', upload.single('image'), createProduct); 
-router.put('/:id', upload.single('image'), updateProduct); 
-router.delete('/:id', deleteProduct);
+// Admin-only routes
+router.post("/", protect, isAdmin, createProduct); 
+router.put("/:id", protect, isAdmin, updateProduct); 
+router.delete("/:id", protect, isAdmin, deleteProduct);
 
 export default router;

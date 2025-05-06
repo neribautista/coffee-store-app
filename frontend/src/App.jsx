@@ -44,7 +44,7 @@ function App() {
         setUser(null);
         navigate("/login");
       }
-    }, 23 * 60 * 60 * 1000); 
+    }, 50 * 1000);  // refresh every 50 seconds
 
     return () => clearInterval(interval); 
   }, [navigate]);

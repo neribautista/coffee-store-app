@@ -32,11 +32,15 @@ const LoginPage = () => {
         const data = await response.json();
         alert("Login successful!");
   
-        // Store the access token in localStorage
+        // Store the access token and user details in localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem(
           "user",
-          JSON.stringify({ first_name: data.first_name })
+          JSON.stringify({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+          })
         );
   
         // Redirect to the home page
