@@ -14,3 +14,6 @@
 ### 🔹 Authentication
 - **JWT (JSON Web Tokens)** – Secure token-based authentication.
 - **HttpOnly Cookies** – Storing refresh tokens securely to protect against XSS attacks.
+
+### 🔹 Debugging & Cleaning the code
+- **Microsoft Co-pilot** - When having trouble connecting to MongoDB, Cookies, Authentication, and cleaning up my CSS code.
