@@ -16,7 +16,9 @@ export const getProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     const { name, price } = req.body;
-  
+    console.log("Request Body:", req.body);
+    console.log("Uploaded File:", req.file);
+    
     if (!name || !price || !req.file) {
       return res.status(400).json({ message: "Missing required fields: name, price, image" });
     }

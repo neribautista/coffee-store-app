@@ -115,7 +115,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
 // Generate a new access token
 const generateAccessToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "15m", 
+    expiresIn: "30m", 
   });
 };
 

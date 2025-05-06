@@ -44,7 +44,7 @@ function App() {
         setUser(null);
         navigate("/login");
       }
-    }, 50 * 1000);  // refresh every 50 seconds
+    }, 30 * 60 * 1000);  // refresh every 30mins as the access token is valid for 30mins
 
     return () => clearInterval(interval); 
   }, [navigate]);
