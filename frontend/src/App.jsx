@@ -9,6 +9,9 @@ import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 import AboutUs from "./pages/AboutUs";
 import MenuPage from "./pages/MenuPage";
+import CartPage from "./pages/CartPage.jsx";
+import OrdersPage from "./pages/OrdersPage.jsx";
+import AdminOrdersPage from "./pages/AdminOrdersPage.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,6 +62,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/menu" element={<MenuPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/admin/orders" element={<AdminOrdersPage />} />
       </Routes>
     </Box>
   );

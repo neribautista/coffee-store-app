@@ -4,6 +4,7 @@ import { connectDB } from './config/db.js';
 import productRoutes from './routes/product.route.js';
 import contactRoutes from './routes/contact.route.js';
 import userRoutes from './routes/user.route.js';
+import orderRoutes from './routes/order.route.js';
 import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
@@ -33,6 +34,7 @@ const PORT = process.env.PORT || 3001;
 app.use("/api/products", productRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Serve the uploads folder as static
 app.use('/uploads', express.static(path.resolve(__dirname, '../uploads'))); 

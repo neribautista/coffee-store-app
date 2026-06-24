@@ -1,0 +1,338 @@
+/* Admin Orders Container */
+.admin-orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 80px;
+  padding-top: 100px;
+  box-sizing: border-box;
+}
+
+.admin-orders-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Orders Table */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  /* NOTE: overflow is intentionally NOT hidden here. Clipping overflow on
+     the table was cutting off the status dropdown's menu whenever it had
+     to render near the bottom of the table — the menu would open but get
+     visually clipped by this container. Rounded corners are instead
+     applied directly to the corner cells below. */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.orders-table thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.orders-table thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.orders-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.orders-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.orders-table thead {
+  background-color: #006241;
+  color: white;
+}
+
+.orders-table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.orders-table td {
+  padding: 12px 15px;
+  font-size: 0.9rem;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.orders-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-processing {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status-out-for-delivery {
+  background-color: #e0d4f7;
+  color: #5b2d8e;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* ---- Custom status dropdown (replaces the native <select> entirely) ---- */
+.status-action {
+  margin-top: 6px;
+}
+
+.status-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.status-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: #333;
+  cursor: pointer;
+  min-width: 150px;
+  justify-content: space-between;
+  transition: border-color 0.2s ease;
+}
+
+.status-dropdown-trigger:hover {
+  border-color: #006241;
+}
+
+/* Terminal states (Completed / Cancelled) render the trigger as a
+   grayed-out, non-interactive box with no caret. */
+.status-dropdown-trigger.disabled {
+  background: #f3f3f3;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #eee;
+}
+
+.status-dropdown-trigger.disabled:hover {
+  border-color: #eee;
+}
+
+.status-dropdown-caret {
+  font-size: 0.7rem;
+  color: #888;
+  transition: transform 0.15s ease;
+}
+
+.status-dropdown-caret.open {
+  transform: rotate(180deg);
+}
+
+.status-dropdown-menu {
+  /* Position (fixed/top/left/minWidth) is set inline via JS, since this
+     menu is rendered through a portal into document.body to escape the
+     table's overflow/clipping. Only visual styling lives here. */
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+}
+
+.status-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.status-dropdown-item:hover {
+  background: #f3f3f3;
+}
+
+.status-dropdown-item.selected {
+  font-weight: 600;
+  color: #006241;
+}
+
+.status-dropdown-check {
+  width: 14px;
+  display: inline-block;
+  color: #006241;
+}
+
+/* ---- Fulfillment tag (Pickup / Delivery) ---- */
+.fulfillment-tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.fulfillment-pickup {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.fulfillment-delivery {
+  background-color: #d1e7ff;
+  color: #084298;
+}
+
+.admin-delivery-address {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: #888;
+  max-width: 180px;
+}
+
+/* ---- Inline tracking-link row ----
+   Rendered only under the Status cell, only while an order's status is
+   "Out for Delivery" — there is no longer a separate, always-visible
+   Tracking Link column. */
+.tracking-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.tracking-input {
+  width: 160px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.tracking-input:focus {
+  border-color: #006241;
+  outline: none;
+}
+
+.tracking-save-btn {
+  background: #006241;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.tracking-save-btn:hover {
+  background: #004d32;
+}
+
+.tracking-cancel-btn {
+  background: #fff;
+  color: #888;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.tracking-cancel-btn:hover {
+  border-color: #bbb;
+  color: #555;
+}
+
+.tracking-confirm-row {
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.tracking-error {
+  width: 100%;
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: #c0392b;
+}
+
+.tracking-view-link {
+  font-size: 0.78rem;
+  color: #006241;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .admin-orders-container {
+    padding: 10px;
+    margin-top: 60px;
+    padding-top: 80px;
+  }
+
+  .orders-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-orders-title {
+    font-size: 1.5rem;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .status-dropdown-trigger {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    min-width: 130px;
+  }
+}

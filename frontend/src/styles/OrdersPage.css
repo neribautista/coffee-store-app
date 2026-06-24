@@ -1,0 +1,290 @@
+/* Orders Container */
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 100px;
+  box-sizing: border-box;
+}
+
+.orders-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.orders-empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 50px;
+}
+
+/* === Append to your existing OrdersPage.css ===
+   Styles for the fulfillment method badge and delivery address line. */
+
+   .order-fulfillment {
+    margin-top: 8px;
+  }
+  
+  .fulfillment-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  
+  .fulfillment-pickup {
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .fulfillment-delivery {
+    background-color: #d1e7ff;
+    color: #084298;
+  }
+  
+  .order-delivery-address {
+    margin: 6px 0 0;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+/* === Append to your existing OrdersPage.css ===
+   Styles for the fulfillment-aware progress tracker, and the new
+   "Out for Delivery" status badge color. */
+
+   .order-tracker {
+    display: flex;
+    align-items: flex-start;
+    margin: 16px 0;
+    padding: 4px 6px;
+  }
+  
+  .tracker-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    min-width: 70px;
+    position: relative;
+  }
+  
+  .tracker-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: #fff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  
+  .tracker-dot.reached {
+    background: #006241;
+    border-color: #006241;
+  }
+  
+  .tracker-dot.current {
+    box-shadow: 0 0 0 3px rgba(0, 98, 65, 0.18);
+  }
+  
+  .tracker-label {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+    max-width: 90px;
+  }
+  
+  .tracker-label.reached {
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+  
+  .tracker-connector {
+    flex: 1 1 auto;
+    height: 2px;
+    background: #ddd;
+    margin-top: 12px;
+    min-width: 16px;
+  }
+  
+  .tracker-connector.reached {
+    background: #006241;
+  }
+  
+  .tracker-track-link {
+    margin-top: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #006241;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+  
+  /* New status color */
+  .status-out-for-delivery {
+    background-color: #e0d4f7;
+    color: #5b2d8e;
+  }
+  
+  /* Responsive: let the tracker scroll horizontally on narrow screens
+     instead of squeezing labels unreadably */
+  @media (max-width: 480px) {
+    .order-tracker {
+      overflow-x: auto;
+    }
+  
+    .tracker-step {
+      min-width: 64px;
+    }
+  
+    .tracker-label {
+      font-size: 0.68rem;
+    }
+  }
+
+/* Order List */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Order Card */
+.order-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Order Header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.order-id {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Order Status */
+.order-status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-processing {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status-completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Order Items */
+.order-items {
+  margin-bottom: 15px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: #555;
+  border-bottom: 1px dashed #eee;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+/* Order Footer */
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.order-total {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #006241;
+}
+
+/* Order Date */
+.order-date {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orders-container {
+    padding: 10px;
+    padding-top: 80px;
+  }
+
+  .orders-title {
+    font-size: 1.5rem;
+  }
+
+  .order-card {
+    padding: 15px;
+  }
+
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .order-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}

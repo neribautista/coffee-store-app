@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #070708, #985517); /* Modern gradient background */
   padding: 20px;
 }
@@ -97,6 +97,35 @@
 
 .contact-submit:active {
   transform: scale(0.80);
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #333;
+}
+
+.cart-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.checkout-button {
+  background-color: #006241;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #004d32;
 }
 
 /* Contact Details Section */

@@ -1,0 +1,215 @@
+.product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .product-modal {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  }
+  
+  .product-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .product-modal-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  
+  .product-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  
+  .product-modal-close:hover {
+    color: #1a1a1a;
+  }
+  
+  .product-modal-body {
+    padding: 16px 20px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .product-modal-no-options {
+    color: #777;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .option-group {
+    margin-bottom: 22px;
+  }
+  
+  .option-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .option-group-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #1a1a1a;
+  }
+  
+  .option-required-badge {
+    background: #f0f0f0;
+    color: #555;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  
+  .option-group-hint {
+    margin: 2px 0 10px;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  
+  .option-choices {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #f0f0f0;
+  }
+  
+  .option-choice-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .option-choice-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .option-choice-name {
+    font-size: 0.98rem;
+    color: #1a1a1a;
+  }
+  
+  .option-choice-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .option-choice-price {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .option-native-input {
+    /* visually hidden, but kept for accessibility / focus / form semantics */
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+  }
+  
+  .option-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s ease;
+  }
+  
+  .option-radio.is-checkbox {
+    border-radius: 5px;
+  }
+  
+  .option-radio.checked {
+    border-color: #1a1a1a;
+    background: #1a1a1a;
+  }
+  
+  .option-radio-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  
+  .option-radio.is-checkbox .option-radio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  
+  .product-modal-error {
+    color: #c0392b;
+    font-size: 0.9rem;
+    margin: 8px 0 0;
+    text-align: center;
+  }
+  
+  .product-modal-footer {
+    padding: 16px 20px 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .product-modal-add-btn {
+    width: 100%;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .product-modal-add-btn:hover {
+    background: #000;
+  }
+  
+  @media (max-width: 480px) {
+    .product-modal {
+      max-width: 100%;
+      max-height: 90vh;
+    }
+  }

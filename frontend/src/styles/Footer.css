@@ -3,10 +3,13 @@ footer {
     background-color: #111;
     padding: 20px;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   footer p {
     color: #777;
+    font-size: 14px;
   }
   
   footer p a {
@@ -16,4 +19,14 @@ footer {
   
   footer p a:hover {
     color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 15px;
+    }
+  
+    footer p {
+      font-size: 12px;
+    }
   }
